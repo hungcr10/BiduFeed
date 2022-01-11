@@ -8,12 +8,12 @@ struct ImageModel: Codable {
         case images = "message"
     }
 }
+//MARK: - FetchItem
 class Networking {
     static let shared = Networking()
     func fetchItem(completion: @escaping (_:ImageModel) -> Void) {
         let session = URLSession.shared
         guard let baseUrl = URL(string:"https://dog.ceo/api/breed/hound/afghan/images/random/3") else {
-            print("sasas")
             return
         }
         let task = session.dataTask(with: baseUrl) { data, _, error in
@@ -31,6 +31,7 @@ class Networking {
          }
          task.resume()
     }
+    //MARK: - Fetch Image
     func fetchImage(url: String, completion: @escaping (_: Data) -> Void) {
         let session = URLSession.shared
         guard let baseURL = URL(string: url) else {

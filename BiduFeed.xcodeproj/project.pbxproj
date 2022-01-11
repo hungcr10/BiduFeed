@@ -121,12 +121,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		3D84C63D278DC22200FCC5F5 /* CacheImage */ = {
+		3D84C63D278DC22200FCC5F5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				3D84C63E278DC24800FCC5F5 /* Networking.swift */,
 			);
-			path = CacheImage;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		3DBFB46C278AA1140009AD57 = {
@@ -154,7 +154,7 @@
 			children = (
 				3DBFB4AD278BC6000009AD57 /* App + Scene */,
 				3DBFB4B7278C14580009AD57 /* Tabbar */,
-				3D84C63D278DC22200FCC5F5 /* CacheImage */,
+				3D84C63D278DC22200FCC5F5 /* Networking */,
 				3DBFB4AC278BC5F60009AD57 /* Home */,
 				3D84C637278D305D00FCC5F5 /* Model */,
 				3DBFB47E278AA1140009AD57 /* Main.storyboard */,

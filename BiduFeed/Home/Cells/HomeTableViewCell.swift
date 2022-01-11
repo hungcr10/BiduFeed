@@ -5,7 +5,7 @@ class HomeTableViewCell: UITableViewCell {
     private var check = true
     private var numberFavoriteReact = 34
     private var images = [String]()
-//MARK: -IBOutlet
+    //MARK: -IBOutlet
     @IBOutlet weak var reactView: UIView!
     @IBOutlet weak var followView: UIView!
     @IBOutlet weak var mainCollectionView: UICollectionView!
@@ -23,13 +23,7 @@ extension HomeTableViewCell {
         super.awakeFromNib()
         setUpCollectionView()
         setUpView()
-        Networking.shared.fetchItem { data in
-            self.images = data.images
-            DispatchQueue.main.async {
-                self.mainCollectionView.reloadData()
-            }
-        }
-        
+        setUpDisplay()
     }
 }
 //MARK: - Button
@@ -51,31 +45,39 @@ extension HomeTableViewCell {
 }
 //MARK: - Helper
 extension HomeTableViewCell {
-    func setUpCollectionView() {
+    private func setUpCollectionView() {
         mainCollectionView.register(UINib(nibName: Contants.collectionNibName, bundle: nil), forCellWithReuseIdentifier: Contants.collectionIdentifier)
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
         mainCollectionView.isPagingEnabled = true
     }
-    func setUpView() {
+    private func setUpView() {
         avtImage.layer.cornerRadius = avtImage.frame.height / 2
         avtImage.layer.borderWidth = 2.0
         avtImage.layer.borderColor = UIColor.red.cgColor
         avtImage.clipsToBounds = true
         reactView.backgroundColor = UIColor(white: 1.0, alpha: 0.3)
         reactView.layer.maskedCorners = [.layerMinXMaxYCorner,
-                                    .layerMinXMinYCorner]
+                                         .layerMinXMinYCorner]
         reactView.layer.cornerRadius = 10
         followView.layer.cornerRadius = followView.frame.height / 2
         favoriteReactImg.image = UIImage(named: "heart")
         favoriteReactLabel.text = "\(numberFavoriteReact)"
-}
-    func configure(with model: Info) {
+    }
+    private func configure(with model: Info) {
         self.nameLabel.text = model.infoName
         self.avtImage.image = model.imageConvert
         self.statusLabel.text = model.status
         self.timeLabel.text = model.time
         self.hangstagLabel.text = model.hagtag
+    }
+    private func setUpDisplay() {
+        Networking.shared.fetchItem { data in
+            self.images = data.images
+            DispatchQueue.main.async {
+                self.mainCollectionView.reloadData()
+            }
+        }
     }
     
 }
