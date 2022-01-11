@@ -64,7 +64,7 @@ extension HomeTableViewCell {
         favoriteReactImg.image = UIImage(named: "heart")
         favoriteReactLabel.text = "\(numberFavoriteReact)"
     }
-    private func configure(with model: Info) {
+    func configure(with model: Info) {
         self.nameLabel.text = model.infoName
         self.avtImage.image = model.imageConvert
         self.statusLabel.text = model.status
