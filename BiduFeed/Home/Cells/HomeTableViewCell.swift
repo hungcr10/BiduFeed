@@ -55,6 +55,7 @@ extension HomeTableViewCell {
         mainCollectionView.register(UINib(nibName: Contants.collectionNibName, bundle: nil), forCellWithReuseIdentifier: Contants.collectionIdentifier)
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
+        mainCollectionView.isPagingEnabled = true
     }
     func setUpView() {
         avtImage.layer.cornerRadius = avtImage.frame.height / 2

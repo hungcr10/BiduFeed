@@ -14,6 +14,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         mainImage.contentMode = .scaleAspectFill
     }
+    
     func configUI(urlImage: String) {
        Networking.shared.fetchImage(url: urlImage) { data in
             DispatchQueue.main.async {
