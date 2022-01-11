@@ -15,7 +15,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         mainImage.contentMode = .scaleAspectFill
     }
     func configUI(urlImage: String) {
-       CacheImgae.shared.fetchImage(url: urlImage) { data in
+       Networking.shared.fetchImage(url: urlImage) { data in
             DispatchQueue.main.async {
                 self.mainImage.image = UIImage(data: data)
             }

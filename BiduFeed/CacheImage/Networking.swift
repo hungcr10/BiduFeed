@@ -2,13 +2,13 @@
 import Foundation
 
 struct ImageModel: Codable {
-    let images: String
+    let images: [String]
 }
-class CacheImgae {
-    static let shared = CacheImgae()
-    func fetchUrl(completion: @escaping (_:ImageModel) -> Void) {
+class Networking {
+    static let shared = Networking()
+    func fetchItem(completion: @escaping (_:ImageModel) -> Void) {
         let session = URLSession.shared
-    guard let baseUrl = URL(string:"https://apod.nasa.gov/apod/image/2201/OrionStarFree3_Harbison_1080.jpg") else {
+        guard let baseUrl = URL(string:"https://apod.nasa.gov/apod/image/2201/OrionStarFree3_Harbison_1080.jpg") else {
             print("sasas")
             return
         }

@@ -4,7 +4,7 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
     private var check = true
     private var numberFavoriteReact = 34
-    private var images: String = ""
+    private var images = [String]()
 //MARK: -IBOutlet
     @IBOutlet weak var reactView: UIView!
     @IBOutlet weak var followView: UIView!
@@ -23,7 +23,7 @@ extension HomeTableViewCell {
         super.awakeFromNib()
         setUpCollectionView()
         setUpView()
-        CacheImgae.shared.fetchUrl { data in
+        Networking.shared.fetchItem { data in
             self.images = data.images
             DispatchQueue.main.async {
                 self.mainCollectionView.reloadData()
@@ -87,7 +87,7 @@ extension HomeTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: Contants.collectionIdentifier, for: indexPath) as! HomeCollectionViewCell
-        cell.configUI(urlImage: images)
+        cell.configUI(urlImage: images[indexPath.row])
         return cell
     }
     
