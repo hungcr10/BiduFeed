@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="389" height="482"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="NTp-jC-u1d">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NTp-jC-u1d">
                         <rect key="frame" x="0.0" y="0.0" width="389" height="482"/>
                     </imageView>
                 </subviews>
@@ -31,12 +31,9 @@
             </constraints>
             <size key="customSize" width="389" height="482"/>
             <connections>
-                <outlet property="mainImage" destination="NTp-jC-u1d" id="6YT-o9-hxe"/>
+                <outlet property="mainImageView" destination="NTp-jC-u1d" id="6YT-o9-hxe"/>
             </connections>
             <point key="canvasLocation" x="393.47826086956525" y="95.758928571428569"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="image" width="540" height="710"/>
-    </resources>
 </document>

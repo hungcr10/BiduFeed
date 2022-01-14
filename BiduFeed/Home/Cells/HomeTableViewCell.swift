@@ -9,13 +9,13 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var reactView: UIView!
     @IBOutlet weak var followView: UIView!
     @IBOutlet weak var mainCollectionView: UICollectionView!
-    @IBOutlet weak var avtImage: UIImageView!
+    @IBOutlet weak var avtImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var hangstagLabel: UILabel!
     @IBOutlet weak var favoriteReactLabel: UILabel!
-    @IBOutlet weak var favoriteReactImg: UIImageView!
+    @IBOutlet weak var favoriteReactImageView: UIImageView!
 }
 //MARK: - Life Cycle
 extension HomeTableViewCell {
@@ -30,11 +30,11 @@ extension HomeTableViewCell {
 extension HomeTableViewCell {
     @IBAction func favoriteReactBtn(_ sender: Any) {
         if check == true {
-            favoriteReactImg.image = UIImage(named: "redheart")
+            favoriteReactImageView.image = UIImage(named: "redheart")
             favoriteReactLabel.text = "\(numberFavoriteReact + 1 )"
             check = false
         } else {
-            favoriteReactImg.image = UIImage(named: "heart")
+            favoriteReactImageView.image = UIImage(named: "heart")
             favoriteReactLabel.text = "\(numberFavoriteReact)"
             check = true
         }
@@ -52,21 +52,21 @@ extension HomeTableViewCell {
         mainCollectionView.isPagingEnabled = true
     }
     private func setUpView() {
-        avtImage.layer.cornerRadius = avtImage.frame.height / 2
-        avtImage.layer.borderWidth = 2.0
-        avtImage.layer.borderColor = UIColor.red.cgColor
-        avtImage.clipsToBounds = true
+        avtImageView.layer.cornerRadius = avtImageView.frame.height / 2
+        avtImageView.layer.borderWidth = 2.0
+        avtImageView.layer.borderColor = UIColor.red.cgColor
+        avtImageView.clipsToBounds = true
         reactView.backgroundColor = UIColor(white: 1.0, alpha: 0.3)
         reactView.layer.maskedCorners = [.layerMinXMaxYCorner,
                                          .layerMinXMinYCorner]
-        reactView.layer.cornerRadius = 10
+        reactView.layer.cornerRadius = 15
         followView.layer.cornerRadius = followView.frame.height / 2
-        favoriteReactImg.image = UIImage(named: "heart")
+        favoriteReactImageView.image = UIImage(named: "heart")
         favoriteReactLabel.text = "\(numberFavoriteReact)"
     }
     func configure(with model: Info) {
         self.nameLabel.text = model.infoName
-        self.avtImage.image = model.imageConvert
+        self.avtImageView.image = model.imageConvert
         self.statusLabel.text = model.status
         self.timeLabel.text = model.time
         self.hangstagLabel.text = model.hagtag

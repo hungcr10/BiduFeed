@@ -214,13 +214,13 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="448" height="30"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQz-3o-h65">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="418" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="10" width="418" height="20"/>
                                                                         <fontDescription key="fontDescription" name="Lexend-SemiBold" family="Lexend" pointSize="21"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="famous" translatesAutoresizingMaskIntoConstraints="NO" id="3EZ-cw-5PM">
-                                                                        <rect key="frame" x="428" y="7.5" width="15" height="15"/>
+                                                                        <rect key="frame" x="428" y="15" width="15" height="15"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="15" id="3pw-SQ-Ovc"/>
                                                                             <constraint firstAttribute="height" constant="15" id="u5h-p5-mtA"/>
@@ -230,13 +230,12 @@
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstItem="rQz-3o-h65" firstAttribute="leading" secondItem="qCB-lZ-p45" secondAttribute="leading" id="2Vv-p1-nBK"/>
-                                                                    <constraint firstItem="3EZ-cw-5PM" firstAttribute="centerY" secondItem="qCB-lZ-p45" secondAttribute="centerY" id="7sj-qR-Ncq"/>
                                                                     <constraint firstAttribute="trailing" secondItem="rQz-3o-h65" secondAttribute="trailing" constant="30" id="FmX-bE-hgj"/>
-                                                                    <constraint firstItem="rQz-3o-h65" firstAttribute="centerY" secondItem="qCB-lZ-p45" secondAttribute="centerY" id="QCy-95-njt"/>
                                                                     <constraint firstAttribute="bottom" secondItem="rQz-3o-h65" secondAttribute="bottom" id="R1V-cw-FCu"/>
                                                                     <constraint firstItem="3EZ-cw-5PM" firstAttribute="leading" secondItem="rQz-3o-h65" secondAttribute="trailing" constant="10" id="aDE-Ai-e5X"/>
+                                                                    <constraint firstItem="3EZ-cw-5PM" firstAttribute="top" secondItem="qCB-lZ-p45" secondAttribute="top" constant="15" id="hbS-JA-TpX"/>
+                                                                    <constraint firstItem="rQz-3o-h65" firstAttribute="top" secondItem="qCB-lZ-p45" secondAttribute="top" constant="10" id="mUB-ff-SZU"/>
                                                                     <constraint firstAttribute="height" constant="30" id="qVF-GT-Fg6"/>
-                                                                    <constraint firstItem="rQz-3o-h65" firstAttribute="top" secondItem="qCB-lZ-p45" secondAttribute="top" id="vcf-E6-KZP"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QpH-pP-g4s">
@@ -392,8 +391,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="avtImage" destination="Pxf-0a-FcP" id="dL0-Md-mTQ"/>
-                <outlet property="favoriteReactImg" destination="aTh-Eb-7US" id="4Fn-IB-OUv"/>
+                <outlet property="avtImageView" destination="Pxf-0a-FcP" id="CKQ-ED-0G4"/>
+                <outlet property="favoriteReactImageView" destination="aTh-Eb-7US" id="4Fn-IB-OUv"/>
                 <outlet property="favoriteReactLabel" destination="fCb-PU-unh" id="wwR-i1-up7"/>
                 <outlet property="followView" destination="1Ea-cw-yFM" id="AF4-Eg-ApY"/>
                 <outlet property="hangstagLabel" destination="diQ-4Q-Ikb" id="hjS-IZ-FPq"/>

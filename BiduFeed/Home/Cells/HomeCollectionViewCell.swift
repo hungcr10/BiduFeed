@@ -8,17 +8,17 @@
 import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var mainImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        mainImage.contentMode = .scaleAspectFill
+        mainImageView.contentMode = .scaleAspectFill
     }
     
     func configUI(urlImage: String) {
        Networking.shared.fetchImage(url: urlImage) { data in
             DispatchQueue.main.async {
-                self.mainImage.image = UIImage(data: data)
+                self.mainImageView.image = UIImage(data: data)
             }
         }
         
