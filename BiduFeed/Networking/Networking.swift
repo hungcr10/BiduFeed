@@ -1,34 +1,47 @@
-
 import Foundation
-import UIKit
+
 struct ImageModel: Codable {
     let images: [String]
+    
     enum CodingKeys: String, CodingKey {
         case images = "message"
     }
 }
-
 //MARK: - FetchItem
 class Networking {
-    let documents = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
-    static let shared = Networking() // singleton
-    
-    func loadData(url: URL, completion: @escaping (Data?, Error?) -> Void) {
-        let fileCachePath = FileManager.default.temporaryDirectory
-            .appendingPathComponent(
-                url.lastPathComponent,
-                isDirectory: false
-            )
-        
-        if let data = Data(contentsOfFile: documents.path) {
-            completion(data, nil)
+    static let shared = Networking()
+    func fetchItem(completion: @escaping (_:ImageModel) -> Void) {
+        let session = URLSession.shared
+        guard let baseUrl = URL(string:"https://dog.ceo/api/breed/hound/afghan/images/random/3") else {
             return
         }
-        
-        download(url: url, toFile: documents) { (error) in
-            let data = Data(contentsOfFile: documents.path)
-            completion(data, error)
+        let task = session.dataTask(with: baseUrl) { data, _, error in
+             guard error == nil else { return }
+             guard let data = data else { return }
+             
+             do {
+                 let output = try JSONDecoder().decode(ImageModel.self, from: data)
+                 completion(output)
+                 print(output)
+
+             } catch {
+                 print(error)
+             }
+         }
+         task.resume()
+    }
+    //MARK: - Fetch Image
+    func fetchImage(url: String, completion: @escaping (_: Data) -> Void) {
+        let session = URLSession.shared
+        guard let baseURL = URL(string: url) else {
+            return
         }
+        let task = session.dataTask(with: baseURL) { data, _, error in
+            guard error == nil else { return }
+            guard let data = data else { return }
+            completion(data)
+        }
+        task.resume()
     }
     
 }

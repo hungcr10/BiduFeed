@@ -1,10 +1,3 @@
-//
-//  HomeCollectionViewCell.swift
-//  BiduFeed
-//
-//  Created by CristianoDaoHung on 11/01/2022.
-//
-
 import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
