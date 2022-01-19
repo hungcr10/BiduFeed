@@ -34,17 +34,26 @@ class Networking {
     }
     //MARK: - Fetch Image
     func fetchImage(url: String, completion: @escaping (_: Data) -> Void) {
-        let session = URLSession.shared
-        guard let baseURL = URL(string: url) else {
-            return
-        }
-            let task = session.dataTask(with: baseURL) { data, _, error in
-                guard error == nil else { return }
-                guard let data = data else { return }
-                completion(data)
-            }
-            task.resume()
-        
+         let pathComponent = documents.appendingPathComponent(url)
+        let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                let imageData = loadImage(url: url)
+                guard let imageData = imageData else {
+                    return
+                }
+                completion(imageData)
+            } else {
+                let session = URLSession.shared
+                guard let baseURL = URL(string: url) else {
+                    return
+                }
+                let task = session.dataTask(with: baseURL) { data, _, error in
+                    guard error == nil else { return }
+                    guard let data = data else { return }
+                    completion(data)
+                }
+                task.resume()            }
     }
     func loadImage(url: String) -> Data? {
         let fileUrl = documents.appendingPathComponent(url)
