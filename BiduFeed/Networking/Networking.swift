@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-
 struct ImageModel: Codable {
     let images: [String]
     
@@ -10,27 +9,32 @@ struct ImageModel: Codable {
 }
 //MARK: - FetchItem
 class Networking {
+    let reachability = try! Reachability()
     static let shared = Networking()
     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     func fetchItem(completion: @escaping (_:ImageModel) -> Void) {
-        guard let baseUrl = URL(string:"https://dog.ceo/api/breed/hound/afghan/images/random/3") else
-        { return }
-        let session = URLSession.shared
-        let task = session.downloadTask(with: baseUrl) { data, _, error in
-            guard error == nil else { return }
-            guard let data = data else { return }
-            do {
-                let output = try JSONDecoder().decode(ImageModel.self, from: Data(contentsOf: data))
-                completion(output)
-                print(output)
-                try FileManager.default.copyItem(at: data, to: self.documents.appendingPathComponent(self.imageDataName(from: data.path)!))
-                print("hhh \(self.documents)")
-                
-            } catch {
-                print(error)
+//        if reachability.isReachable == true  {
+//            print("Connection is on")
+//        }
+            guard let baseUrl = URL(string:"https://dog.ceo/api/breed/hound/afghan/images/random/3") else
+            { return }
+            let session = URLSession.shared
+            let task = session.downloadTask(with: baseUrl) { data, _, error in
+                guard error == nil else { return }
+                guard let data = data else { return }
+                do {
+                    let output = try JSONDecoder().decode(ImageModel.self, from: Data(contentsOf: data))
+                    completion(output)
+                    print(output)
+                    try FileManager.default.copyItem(at: data, to: self.documents.appendingPathComponent(self.imageDataName(from: data.path)!))
+                    print("hhh \(self.documents)")
+                    
+                } catch {
+                    print(error)
+                }
             }
-        }
-        task.resume()
+            task.resume()
+          
     }
     //MARK: - Fetch Image
     func fetchImage(url: String, completion: @escaping (_: Data) -> Void) {

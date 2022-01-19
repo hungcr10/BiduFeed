@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D661402279813A300C81C33 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D661401279813A300C81C33 /* Connection.swift */; };
 		3D84C62E278D0A7A00FCC5F5 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D84C62C278D0A7A00FCC5F5 /* HomeCollectionViewCell.swift */; };
 		3D84C62F278D0A7A00FCC5F5 /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D84C62D278D0A7A00FCC5F5 /* HomeCollectionViewCell.xib */; };
 		3D84C634278D2A0300FCC5F5 /* Lexend.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D84C631278D2A0300FCC5F5 /* Lexend.ttf */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D661401279813A300C81C33 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		3D84C62C278D0A7A00FCC5F5 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D84C62D278D0A7A00FCC5F5 /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		3D84C631278D2A0300FCC5F5 /* Lexend.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lexend.ttf; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				3D84C63E278DC24800FCC5F5 /* Networking.swift */,
+				3D661401279813A300C81C33 /* Connection.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D84C63F278DC24900FCC5F5 /* Networking.swift in Sources */,
+				3D661402279813A300C81C33 /* Connection.swift in Sources */,
 				3D84C62E278D0A7A00FCC5F5 /* HomeCollectionViewCell.swift in Sources */,
 				3DBFB47D278AA1140009AD57 /* ViewController.swift in Sources */,
 				3DBFB4B5278BC8980009AD57 /* HomeTableViewCell.swift in Sources */,
