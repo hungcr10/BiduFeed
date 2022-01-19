@@ -72,14 +72,13 @@ extension HomeTableViewCell {
         self.hangstagLabel.text = model.hagtag
     }
     private func setUpDisplay() {
-        Networking.shared.fetchItem { data in
-            self.images = data.images
-            DispatchQueue.main.async {
-                self.mainCollectionView.reloadData()
+            Networking.shared.fetchItem { data in
+                self.images = data.images
+                DispatchQueue.main.async {
+                    self.mainCollectionView.reloadData()
+                }
             }
         }
-    }
-    
 }
 //MARK: - UICollectionViewDataSource
 extension HomeTableViewCell: UICollectionViewDataSource {
