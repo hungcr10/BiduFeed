@@ -83,13 +83,22 @@ extension HomeTableViewCell {
                 }
             }
         } else {
-            let directoryContents = try? FileManager.default.contentsOfDirectory(at: Networking.shared.documents, includingPropertiesForKeys: nil, options: [])
-            guard let directoryContents = directoryContents else { return }
-            let imagesLocal = directoryContents.map { $0.lastPathComponent }
-            let imagesLoadLocal = ImageModel.init(images: imagesLocal)
-            self.images = imagesLoadLocal.images
-            print(images)
-            
+            Networking.shared.fetchItem { data in
+                self.images = data.images
+                DispatchQueue.main.async {
+                     self.mainCollectionView.reloadData()
+
+                }
+            }
+//            let directoryContents = try? FileManager.default.contentsOfDirectory(at: Networking.shared.documents, includingPropertiesForKeys: nil, options: [])
+//            guard let directoryContents = directoryContents else { return }
+//            let imagesLocal = directoryContents.map { $0.lastPathComponent }
+//            let imagesLoadLocal = ImageModel.init(images: imagesLocal)
+//            self.images = imagesLoadLocal.images
+//            DispatchQueue.main.async {
+//                self.mainCollectionView.reloadData()
+//            }
+//            print(images)
         }
     }
     

@@ -35,8 +35,8 @@ class Networking {
         } else {
             let directoryContents = try? FileManager.default.contentsOfDirectory(at: self.documents, includingPropertiesForKeys: nil, options: [])
             guard let directoryContents = directoryContents else { return }
-            let images = directoryContents.map { $0.lastPathComponent }
-            let imagesArrs = ImageModel.init(images: images)
+            let imagess = directoryContents.map { $0.lastPathComponent }
+            let imagesArrs = ImageModel.init(images: imagess)
             completion(imagesArrs)
             print("Internet is not connected")
         }

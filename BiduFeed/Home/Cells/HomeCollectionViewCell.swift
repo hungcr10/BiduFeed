@@ -7,7 +7,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         mainImageView.contentMode = .scaleAspectFill
     }
-    
     func configUI(urlImage: String) {
         let fileDocument = Networking.shared.documents
         let myFile = fileDocument.appendingPathComponent(urlImage).lastPathComponent
