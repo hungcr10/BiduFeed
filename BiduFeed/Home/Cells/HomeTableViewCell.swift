@@ -74,10 +74,10 @@ extension HomeTableViewCell {
     private func setUpDisplay() {
         if Networking.check.connection != .unavailable {
             Networking.shared.fetchItem { data in
-                let fileDocument = Networking.shared.documents
-                let myFile = fileDocument.appendingPathComponent("MyFile.plist")
+//                let fileDocument = Networking.shared.documents
+//                let myFile = fileDocument.appendingPathComponent("MyFile.plist")
+//                (self.images as NSArray).write(to: myFile, atomically: true)
                 self.images = data.images
-                (self.images as NSArray).write(to: myFile, atomically: true)
                 DispatchQueue.main.async {
                     self.mainCollectionView.reloadData()
                 }
@@ -89,6 +89,7 @@ extension HomeTableViewCell {
             let imagesLoadLocal = ImageModel.init(images: imagesLocal)
             self.images = imagesLoadLocal.images
             print(images)
+            
         }
     }
     
