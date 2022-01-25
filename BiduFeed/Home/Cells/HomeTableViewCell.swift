@@ -86,8 +86,8 @@ extension HomeTableViewCell {
             let directoryContents = try? FileManager.default.contentsOfDirectory(at: Networking.shared.documents, includingPropertiesForKeys: nil, options: [])
             guard let directoryContents = directoryContents else { return }
             let imagesLocal = directoryContents.map { $0.lastPathComponent }
-            let imagesArr = ImageModel.init(images: imagesLocal)
-            self.images = imagesArr.images
+            let imagesLoadLocal = ImageModel.init(images: imagesLocal)
+            self.images = imagesLoadLocal.images
             print(images)
         }
     }
