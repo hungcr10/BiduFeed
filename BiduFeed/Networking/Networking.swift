@@ -11,7 +11,7 @@ struct ImageModel: Codable {
 class Networking {
     let isConnected = true
     static let shared = Networking()
-    static let checkConnect = try! Reachability()
+   // static let checkConnect = try! Reachability()
     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     func fetchItem(completion: @escaping (_:ImageModel) -> Void) {
         guard isConnected else { return }

@@ -90,20 +90,20 @@ extension HomeTableViewCell {
         }
     }
     
-    func saveJSONLocal(model: ImageModel) {
+    private func saveJSONLocal(model: ImageModel) {
         let fileURL = FileManager.default.urls(for: .documentDirectory,
-                                                in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
+                                                  in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
         let dogData = try! JSONEncoder().encode(model)
         do {
-           try dogData.write(to: fileURL)
+            try dogData.write(to: fileURL)
         } catch  {
             print(error)
         }
     }
     
-    func getJSONLocal() -> ImageModel? {
+    private func getJSONLocal() -> ImageModel? {
         let fileURL = FileManager.default.urls(for: .documentDirectory,
-                                                in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
+                                                  in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
         guard  let data = try? Data(contentsOf: fileURL) else { return nil }
         let result = try? JSONDecoder().decode(ImageModel.self, from: data)
         return result
