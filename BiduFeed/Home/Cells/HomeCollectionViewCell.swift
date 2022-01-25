@@ -19,12 +19,12 @@ class HomeCollectionViewCell: UICollectionViewCell {
                 DispatchQueue.main.async {
                     self.mainImageView.image = UIImage(data: data)
                 }
-//                let directoryContents = try? FileManager.default.contentsOfDirectory(at: fileDocument, includingPropertiesForKeys: nil, options: [])
-//                guard let directoryContents = directoryContents else {return}
-//                if directoryContents.count > 50 {
-//                    try? FileManager.default.removeItem(at: directoryContents.first!)
-//                }
-//              print("numbers of documents: \(directoryContents.count)")
+                let directoryContents = try? FileManager.default.contentsOfDirectory(at: fileDocument, includingPropertiesForKeys: nil, options: [])
+                guard let directoryContents = directoryContents else {return}
+                if directoryContents.count > 50 {
+                    try? FileManager.default.removeItem(at: directoryContents.first!)
+                }
+              print("numbers of documents: \(directoryContents.count)")
            }
         } else {
             mainImageView.image = Networking.shared.loadImage(url: urlImage)
