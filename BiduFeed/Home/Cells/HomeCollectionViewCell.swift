@@ -11,7 +11,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         let fileDocument = Networking.shared.documents
         let myFile = fileDocument.appendingPathComponent(urlImage).lastPathComponent
         let myFileDocument = fileDocument.appendingPathComponent(myFile)
-        if Networking.check.connection != .unavailable {
+        if Networking.checkConnect.connection != .unavailable {
             Networking.shared.fetchImage(url: urlImage) { data in
                 try? data.write(to: myFileDocument)
                 print(myFileDocument)

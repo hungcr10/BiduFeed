@@ -90,15 +90,12 @@ extension HomeTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: Contants.collectionIdentifier, for: indexPath) as! HomeCollectionViewCell
         cell.configUI(urlImage: images[indexPath.row])
         return cell
     }
-    
-    
 }
 //MARK: - UICollectionViewDelegate
 extension HomeTableViewCell: UICollectionViewDelegate {

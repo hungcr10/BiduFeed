@@ -10,10 +10,13 @@ struct ImageModel: Codable {
 //MARK: - FetchItem
 class Networking {
     static let shared = Networking()
-    static let check = try! Reachability()
+    static let checkConnect = try! Reachability()
     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     func fetchItem(completion: @escaping (_:ImageModel) -> Void) {
-        if Networking.check.connection != .unavailable {
+        let directoryContents = try? FileManager.default.contentsOfDirectory(at: self.documents, includingPropertiesForKeys: nil, options: [])
+        guard let directoryContents = directoryContents else { return }
+        
+        if Networking.checkConnect.connection != .unavailable {
             guard let baseUrl = URL(string:"https://dog.ceo/api/breed/hound/afghan/images") else
             { return }
             let session = URLSession.shared
@@ -24,20 +27,17 @@ class Networking {
                     let output = try JSONDecoder().decode(ImageModel.self, from:Data(contentsOf: data))
                     completion(output)
                     //  print(output)
-                    
                 } catch {
                     print(error)
-                    
                 }
             }
             task.resume()
             print("Internet is connected")
+            
         } else {
-            let directoryContents = try? FileManager.default.contentsOfDirectory(at: self.documents, includingPropertiesForKeys: nil, options: [])
-            guard let directoryContents = directoryContents else { return }
-            let imagess = directoryContents.map { $0.lastPathComponent }
-            let imagesArrs = ImageModel.init(images: imagess)
-            completion(imagesArrs)
+            let imagesLocal = directoryContents.map { $0.lastPathComponent }
+            let imagesArr = ImageModel.init(images: imagesLocal)
+            completion(imagesArr)
             print("Internet is not connected")
         }
         
