@@ -69,17 +69,31 @@ extension HomeTableViewCell {
         self.avtImageView.image = model.imageConvert
         self.statusLabel.text = model.status
         self.timeLabel.text = model.time
-        self.hangstagLabel.text = model.hagtag
+        self.hangstagLabel.text = model.hangstag
     }
     private func setUpDisplay() {
+        if Networking.check.connection != .unavailable {
             Networking.shared.fetchItem { data in
+                let fileDocument = Networking.shared.documents
+                let myFile = fileDocument.appendingPathComponent("MyFile.plist")
                 self.images = data.images
+                (self.images as NSArray).write(to: myFile, atomically: true)
                 DispatchQueue.main.async {
                     self.mainCollectionView.reloadData()
                 }
             }
+        } else {
+            let directoryContents = try? FileManager.default.contentsOfDirectory(at: Networking.shared.documents, includingPropertiesForKeys: nil, options: [])
+            guard let directoryContents = directoryContents else { return }
+            let imagesLocal = directoryContents.map { $0.lastPathComponent }
+            let imagesArr = ImageModel.init(images: imagesLocal)
+            self.images = imagesArr.images
+            print(images)
         }
+    }
+    
 }
+
 //MARK: - UICollectionViewDataSource
 extension HomeTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
