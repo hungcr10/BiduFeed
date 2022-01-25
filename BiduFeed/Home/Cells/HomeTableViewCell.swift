@@ -72,33 +72,14 @@ extension HomeTableViewCell {
         self.hangstagLabel.text = model.hangstag
     }
     private func setUpDisplay() {
-        if Networking.check.connection != .unavailable {
-            Networking.shared.fetchItem { data in
+        Networking.shared.fetchItem { data in
 //                let fileDocument = Networking.shared.documents
 //                let myFile = fileDocument.appendingPathComponent("MyFile.plist")
 //                (self.images as NSArray).write(to: myFile, atomically: true)
-                self.images = data.images
-                DispatchQueue.main.async {
-                    self.mainCollectionView.reloadData()
-                }
+            self.images = data.images
+            DispatchQueue.main.async {
+                self.mainCollectionView.reloadData()
             }
-        } else {
-            Networking.shared.fetchItem { data in
-                self.images = data.images
-                DispatchQueue.main.async {
-                     self.mainCollectionView.reloadData()
-
-                }
-            }
-//            let directoryContents = try? FileManager.default.contentsOfDirectory(at: Networking.shared.documents, includingPropertiesForKeys: nil, options: [])
-//            guard let directoryContents = directoryContents else { return }
-//            let imagesLocal = directoryContents.map { $0.lastPathComponent }
-//            let imagesLoadLocal = ImageModel.init(images: imagesLocal)
-//            self.images = imagesLoadLocal.images
-//            DispatchQueue.main.async {
-//                self.mainCollectionView.reloadData()
-//            }
-//            print(images)
         }
     }
     
