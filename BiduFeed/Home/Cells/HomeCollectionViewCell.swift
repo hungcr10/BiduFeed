@@ -2,7 +2,6 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mainImageView: UIImageView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         mainImageView.contentMode = .scaleAspectFill
