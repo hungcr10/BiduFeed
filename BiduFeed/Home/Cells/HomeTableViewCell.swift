@@ -46,7 +46,7 @@ extension HomeTableViewCell {
 //MARK: - Helper
 extension HomeTableViewCell {
     private func setUpCollectionView() {
-        mainCollectionView.register(UINib(nibName: Contants.collectionNibName, bundle: nil), forCellWithReuseIdentifier: Contants.collectionIdentifier)
+        mainCollectionView.register(UINib(nibName: Constants.collectionNibName, bundle: nil), forCellWithReuseIdentifier: Constants.collectionIdentifier)
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
         mainCollectionView.isPagingEnabled = true
@@ -72,15 +72,41 @@ extension HomeTableViewCell {
         self.hangstagLabel.text = model.hangstag
     }
     private func setUpDisplay() {
-        Networking.shared.fetchItem { data in
-//                let fileDocument = Networking.shared.documents
-//                let myFile = fileDocument.appendingPathComponent("MyFile.plist")
-//                (self.images as NSArray).write(to: myFile, atomically: true)
-            self.images = data.images
-            DispatchQueue.main.async {
-                self.mainCollectionView.reloadData()
+        let jsonFile = FileManager.default.urls(for: .documentDirectory,
+                                                   in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
+        print(jsonFile)
+        if FileManager.default.fileExists(atPath: jsonFile.path) {
+            guard let imageModel = getJSONLocal() else { return }
+            images = imageModel.images
+            mainCollectionView.reloadData()
+        } else {
+            Networking.shared.fetchItem { data in
+                self.saveJSONLocal(model: data)
+                self.images = data.images
+                DispatchQueue.main.async {
+                    self.mainCollectionView.reloadData()
+                }
             }
         }
+    }
+    
+    func saveJSONLocal(model: ImageModel) {
+        let fileURL = FileManager.default.urls(for: .documentDirectory,
+                                                in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
+        let dogData = try! JSONEncoder().encode(model)
+        do {
+           try dogData.write(to: fileURL)
+        } catch  {
+            print(error)
+        }
+    }
+    
+    func getJSONLocal() -> ImageModel? {
+        let fileURL = FileManager.default.urls(for: .documentDirectory,
+                                                in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
+        guard  let data = try? Data(contentsOf: fileURL) else { return nil }
+        let result = try? JSONDecoder().decode(ImageModel.self, from: data)
+        return result
     }
     
 }
@@ -92,8 +118,9 @@ extension HomeTableViewCell: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: Contants.collectionIdentifier, for: indexPath) as! HomeCollectionViewCell
-        cell.configUI(urlImage: images[indexPath.row])
+        let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.collectionIdentifier, for: indexPath) as! HomeCollectionViewCell
+        let urlImage = URL(string: images[indexPath.row])
+        cell.configUI(urlImage: urlImage)
         return cell
     }
 }

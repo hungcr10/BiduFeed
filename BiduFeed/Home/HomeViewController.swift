@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
 //MARK: - Setup
 extension HomeViewController {
     func setUpTableView() {
-        mainTableView.register(UINib(nibName: Contants.tableNibName, bundle: nil), forCellReuseIdentifier: Contants.tableIdentifier)
+        mainTableView.register(UINib(nibName: Constants.tableNibName, bundle: nil), forCellReuseIdentifier: Constants.tableIdentifier)
         mainTableView.dataSource = self
         mainTableView.delegate = self
         mainTableView.separatorStyle = .none
@@ -32,7 +32,7 @@ extension HomeViewController: UITableViewDataSource {
         return Infomation.infomation.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = mainTableView.dequeueReusableCell(withIdentifier: Contants.tableIdentifier) as! HomeTableViewCell
+        let cell = mainTableView.dequeueReusableCell(withIdentifier: Constants.tableIdentifier) as! HomeTableViewCell
         cell.configure(with: Infomation.infomation[indexPath.row])
         return cell
     }
