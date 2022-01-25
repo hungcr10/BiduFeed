@@ -6,7 +6,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         mainImageView.contentMode = .scaleAspectFill
     }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         mainImageView.image = nil
