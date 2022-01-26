@@ -18,11 +18,8 @@ extension HomeCollectionViewCell {
                                                        in: .userDomainMask).first!
         let myImgs = FileManager.default.urls(for: .documentDirectory,
                                                         in: .userDomainMask).first!.appendingPathComponent(Constants.URLImages)
-        if !FileManager.default.fileExists(atPath: myImgs.absoluteString) {
-           try? FileManager.default.createDirectory(atPath: myImgs.path, withIntermediateDirectories: false, attributes: nil)
-        }
+        
             
-      
         guard let urlImage = urlImage else { return }
         let myFile = urlImage.lastPathComponent
         let imageFileDocument = myImgs.appendingPathComponent(myFile)
