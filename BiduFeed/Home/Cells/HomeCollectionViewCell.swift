@@ -17,9 +17,9 @@ extension HomeCollectionViewCell {
         let fileDocument = FileManager.default.urls(for: .documentDirectory,
                                                        in: .userDomainMask).first!
         let myImgs = FileManager.default.urls(for: .documentDirectory,
-                                                        in: .userDomainMask).first!.appendingPathComponent(Constants.URLImages)
+                                                 in: .userDomainMask).first!.appendingPathComponent(Constants.URLImages)
         if !FileManager.default.fileExists(atPath: myImgs.absoluteString) {
-          try? FileManager.default.createDirectory(atPath: myImgs.path, withIntermediateDirectories: false, attributes: nil)
+            try? FileManager.default.createDirectory(atPath: myImgs.path, withIntermediateDirectories: false, attributes: nil)
         }
         guard let urlImage = urlImage else { return }
         let myFile = urlImage.lastPathComponent
@@ -37,18 +37,16 @@ extension HomeCollectionViewCell {
                 }
                 do {
                     try data.write(to: fileImgs)
-                    
-                    let directoryContents = try? FileManager.default.contentsOfDirectory(at: fileImgs, includingPropertiesForKeys: nil, options: [])
-                    guard let directoryContents = directoryContents else {return}
-                    if directoryContents.count > 50 {
-                        try? FileManager.default.removeItem(at: directoryContents.first!)
-                    }
                 } catch  {
                     print(error)
                 }
             }
         }
-
+        let directoryContents = try? FileManager.default.contentsOfDirectory(at: fileImgs, includingPropertiesForKeys: nil, options: [])
+        guard let directoryContents = directoryContents else {return}
+        if directoryContents.count > 50 {
+            try? FileManager.default.removeItem(at: directoryContents.first!)
+        }
     }
 }
 
