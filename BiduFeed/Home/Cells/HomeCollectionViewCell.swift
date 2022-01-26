@@ -26,8 +26,10 @@ extension HomeCollectionViewCell {
         let myFile = urlImage.lastPathComponent
        // let imageFileDocument = fileDocument.appendingPathComponent(myFile).lastPathComponent
         let fileImgs = urlImgs.appendingPathComponent(myFile)
+        print("Document: \(fileDocument)")
+        print("url Images:\(urlImgs)")
         print("File Images: ", fileImgs)
-        print("Document:  \(fileDocument)")
+      
         if FileManager.default.fileExists(atPath: fileImgs.path) {
             let imageData = try! Data(contentsOf: fileImgs)
             mainImageView.image = UIImage(data: imageData)

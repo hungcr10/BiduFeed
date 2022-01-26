@@ -74,7 +74,7 @@ extension HomeTableViewCell {
     private func setUpDisplay() {
         let jsonFile = FileManager.default.urls(for: .documentDirectory,
                                                    in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
-        print(jsonFile)
+        print("file Json",jsonFile)
         if FileManager.default.fileExists(atPath: jsonFile.path) {
             guard let imageModel = getJSONLocal() else { return }
             images = imageModel.images
