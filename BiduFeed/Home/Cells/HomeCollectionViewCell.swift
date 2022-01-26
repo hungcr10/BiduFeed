@@ -16,15 +16,16 @@ extension HomeCollectionViewCell {
     func configUI(urlImage: URL?) {
         let fileDocument = FileManager.default.urls(for: .documentDirectory,
                                                        in: .userDomainMask).first!
-        let myImgs = FileManager.default.urls(for: .documentDirectory,
+
+        let urlImgs = FileManager.default.urls(for: .documentDirectory,
                                                  in: .userDomainMask).first!.appendingPathComponent(Constants.URLImages)
-        if !FileManager.default.fileExists(atPath: myImgs.absoluteString) {
-            try? FileManager.default.createDirectory(atPath: myImgs.path, withIntermediateDirectories: false, attributes: nil)
+        if !FileManager.default.fileExists(atPath: urlImgs.absoluteString) {
+            try? FileManager.default.createDirectory(atPath: urlImgs.path, withIntermediateDirectories: false, attributes: nil)
         }
         guard let urlImage = urlImage else { return }
         let myFile = urlImage.lastPathComponent
        // let imageFileDocument = fileDocument.appendingPathComponent(myFile).lastPathComponent
-        let fileImgs = myImgs.appendingPathComponent(myFile)
+        let fileImgs = urlImgs.appendingPathComponent(myFile)
         print("File Images: ", fileImgs)
         print("Document:  \(fileDocument)")
         if FileManager.default.fileExists(atPath: fileImgs.path) {
@@ -37,18 +38,18 @@ extension HomeCollectionViewCell {
                 }
                 do {
                     try data.write(to: fileImgs)
+                    
                 } catch  {
                     print(error)
                 }
-                let directoryContents = try? FileManager.default.contentsOfDirectory(at: fileImgs, includingPropertiesForKeys: nil, options: [])
-                guard let directoryContents = directoryContents else {return}
-                if directoryContents.count > 50 {
-                    try? FileManager.default.removeItem(at: directoryContents.first!)
-                    print("Number of images: \(directoryContents.count)")
-                }
             }
         }
-        
+        let directoryContents = try? FileManager.default.contentsOfDirectory(at: urlImgs , includingPropertiesForKeys: nil, options: [])
+        guard let directoryContents = directoryContents else {return}
+        if directoryContents.count > 50 {
+            try? FileManager.default.removeItem(at: directoryContents.first!)
+        }
+        print("Number of images: \(directoryContents.count)")
     }
 }
 
