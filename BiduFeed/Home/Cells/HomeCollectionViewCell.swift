@@ -26,6 +26,7 @@ extension HomeCollectionViewCell {
         let imageFileDocument = fileDocument.appendingPathComponent(myFile).lastPathComponent
         let fileImgs = myImgs.appendingPathComponent(imageFileDocument)
         print("aa", fileImgs)
+        print("Document \(fileDocument)")
         if FileManager.default.fileExists(atPath: fileImgs.path) {
             let imageData = try! Data(contentsOf: fileImgs)
             mainImageView.image = UIImage(data: imageData)
@@ -47,7 +48,6 @@ extension HomeCollectionViewCell {
                 }
             }
         }
-        print("Document \(fileDocument)")
 
     }
 }
