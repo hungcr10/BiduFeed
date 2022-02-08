@@ -4,7 +4,7 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
     private var check = true
     private var numberFavoriteReact = 34
-    private var images = [String]()
+    var images = [String]()
     //MARK: -IBOutlet
     @IBOutlet weak var reactView: UIView!
     @IBOutlet weak var followView: UIView!
@@ -23,7 +23,6 @@ extension HomeTableViewCell {
         super.awakeFromNib()
         setUpCollectionView()
         setUpView()
-        setUpDisplay()
     }
 }
 //MARK: - Button
@@ -71,43 +70,7 @@ extension HomeTableViewCell {
         self.timeLabel.text = model.time
         self.hangstagLabel.text = model.hangstag
     }
-    private func setUpDisplay() {
-        let jsonFile = FileManager.default.urls(for: .documentDirectory,
-                                                   in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
-        print("file Json",jsonFile)
-        if FileManager.default.fileExists(atPath: jsonFile.path) {
-            guard let imageModel = getJSONLocal() else { return }
-            images = imageModel.images
-            mainCollectionView.reloadData()
-        } else {
-            Networking.shared.fetchItem { data in
-                self.saveJSONLocal(model: data)
-                self.images = data.images
-                DispatchQueue.main.async {
-                    self.mainCollectionView.reloadData()
-                }
-            }
-        }
-    }
-    
-    private func saveJSONLocal(model: ImageModel) {
-        let fileURL = FileManager.default.urls(for: .documentDirectory,
-                                                  in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
-        let dogData = try! JSONEncoder().encode(model)
-        do {
-            try dogData.write(to: fileURL)
-        } catch  {
-            print(error)
-        }
-    }
-    
-    private func getJSONLocal() -> ImageModel? {
-        let fileURL = FileManager.default.urls(for: .documentDirectory,
-                                                  in: .userDomainMask).first!.appendingPathComponent(Constants.URLName)
-        guard  let data = try? Data(contentsOf: fileURL) else { return nil }
-        let result = try? JSONDecoder().decode(ImageModel.self, from: data)
-        return result
-    }
+     
     
 }
 
