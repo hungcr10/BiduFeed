@@ -1,11 +1,9 @@
-import Foundation
 import UIKit
 
 //MARK: - FetchItem
 class Networking {
     let isConnected = true
     static let shared = Networking()
-   // static let checkConnect = try! Reachability()
     let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     func fetchItem(completion: @escaping (_:PostModel) -> Void) {
         guard isConnected else { return }
@@ -24,6 +22,7 @@ class Networking {
         }
         task.resume()
     }
+    
     //MARK: - Fetch Image
     func fetchImage(url: String, completion: @escaping (_: Data) -> Void) {
         guard isConnected else { return }

@@ -2,15 +2,21 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mainImageView: UIImageView!
+}
+
+//MARK: -Life Cycle
+extension HomeCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         mainImageView.contentMode = .scaleAspectFill
     }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         mainImageView.image = nil
     }
 }
+
 //MARK: - Config UI
 extension HomeCollectionViewCell {
     func configUI(urlImage: URL?) {
@@ -24,12 +30,10 @@ extension HomeCollectionViewCell {
         }
         guard let urlImage = urlImage else { return }
         let myFile = urlImage.lastPathComponent
-       // let imageFileDocument = fileDocument.appendingPathComponent(myFile).lastPathComponent
         let fileImgs = urlImgs.appendingPathComponent(myFile)
         print("Document: \(fileDocument)")
         print("url Images:\(urlImgs)")
         print("File Images: ", fileImgs)
-      
         if FileManager.default.fileExists(atPath: fileImgs.path) {
             let imageData = try! Data(contentsOf: fileImgs)
             mainImageView.image = UIImage(data: imageData)

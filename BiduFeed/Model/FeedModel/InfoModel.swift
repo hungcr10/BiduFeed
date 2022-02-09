@@ -1,18 +1,5 @@
-//
-//  File.swift
-//  BiduFeed
-//
-//  Created by CristianoDaoHung on 11/01/2022.
-//
-import Foundation
 import UIKit
-struct PostModel: Codable {
-    let images: [String]
-    
-    enum CodingKeys: String, CodingKey {
-        case images = "message"
-    }
-}
+
 struct Info {
     let infoName: String
     let time: String
@@ -23,6 +10,7 @@ struct Info {
         return UIImage(named: avartar)
     }
 }
+
 struct Infomation {
     static let infomation = [
     Info(infoName: "Hồ Phương Anh", time: "12 phút trước", status: """
